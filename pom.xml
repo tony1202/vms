@@ -6,7 +6,10 @@
 	<groupId>com.gfx</groupId>
 	<artifactId>vms</artifactId>
 	<version>1.0.0-RELEASE</version>
-	<packaging>jar</packaging>
+    <modules>
+        <module>generalmapper</module>
+    </modules>
+    <packaging>pom</packaging>
 
 	<name>vms</name>
 	<description>Demo project for Spring Boot</description>

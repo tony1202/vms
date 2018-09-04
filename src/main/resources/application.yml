@@ -18,6 +18,16 @@ spring:
     date-format: "yyyy-MM-dd HH:mm:ss"
     time-zone: "Asia/shanghai"
     serialization: false
+#  数据配置
+  datasource:
+    druid:
+      driver-class-name: "com.mysql.jdbc.Driver"
+      username: "root"
+      password: "123456"
+      url: "jdbc:mysql://localhost:3306/gfx"
+      max-active: 20
+      min-idle: 1
+      initial-size: 1
 
 mybatis:
   type-aliases-package: com.gfx.vms.common.entity
