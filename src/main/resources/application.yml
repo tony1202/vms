@@ -1,3 +1,4 @@
+debug: false
 server:
   port: 8080
   servlet:
@@ -16,32 +17,35 @@ spring:
     date-format: "yyyy-MM-dd HH:mm:ss"
   jackson:
     date-format: "yyyy-MM-dd HH:mm:ss"
-    time-zone: "Asia/shanghai"
-    serialization: false
+    time-zone: Asia/Shanghai
+
 #  数据配置
   datasource:
     druid:
-      driver-class-name: "com.mysql.jdbc.Driver"
-      username: "root"
-      password: "123456"
-      url: "jdbc:mysql://localhost:3306/gfx"
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: 123456
+      url: jdbc:mysql://localhost:3306/gfx?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
       max-active: 20
       min-idle: 1
       initial-size: 1
 
 mybatis:
   type-aliases-package: com.gfx.vms.common.entity
-  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  mapper-locations: classpath*:mapper/*Mapper.xml
   configuration:
     #开启驼峰转换
     map-underscore-to-camel-case: true
     jdbc-type-for-null: "NULL"
+
 mapper:
   mappers: tk.mybatis.mapper.common.Mapper
   identity: MYSQL
   not-empty: false
+
+
 pagehelper:
-  dialect: mysql
+#  dialect: mysql
   reasonable: true
   support-methods-arguments: true
   page-size-zero: true
