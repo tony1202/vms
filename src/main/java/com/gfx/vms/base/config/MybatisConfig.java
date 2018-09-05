@@ -1,7 +1,8 @@
 package com.gfx.vms.base.config;
 
-import org.mybatis.spring.annotation.MapperScan;
+
 import org.springframework.context.annotation.Configuration;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * @author tony
@@ -9,6 +10,6 @@ import org.springframework.context.annotation.Configuration;
  * @Description:
  */
 @Configuration
-@MapperScan(basePackages = "com.gfx.vms.common.dao.mapper")
+@MapperScan(basePackages = {"com.gfx.vms.common.dao.mapper"})
 public class MybatisConfig {
 }

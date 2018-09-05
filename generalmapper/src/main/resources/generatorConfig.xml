@@ -40,8 +40,12 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table schema="" tableName="permission"/>
-        <table schema="" tableName="role"/>
-        <table schema="" tableName="user"/>
+        <!--<table schema="" tableName="permission"/>-->
+        <!--<table schema="" tableName="role"/>-->
+        <!--<table schema="" tableName="user"/>-->
+        <!--<table schema="" tableName="user"/>-->
+
+        <!--将所有的表都生成-->
+        <table schema="" tableName="%"/>
     </context>
 </generatorConfiguration>

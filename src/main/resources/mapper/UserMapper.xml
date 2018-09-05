@@ -9,6 +9,6 @@
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
     <result column="create_date" jdbcType="DATE" property="createDate" />
-    <result column="updata_date" jdbcType="DATE" property="updataDate" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
   </resultMap>
 </mapper>

@@ -39,8 +39,8 @@ public class Permission {
     /**
      * 更新时间
      */
-    @Column(name = "updata_date")
-    private Date updataDate;
+    @Column(name = "update_date")
+    private Date updateDate;
 
     /**
      * 获取权限id
@@ -135,18 +135,18 @@ public class Permission {
     /**
      * 获取更新时间
      *
-     * @return updata_date - 更新时间
+     * @return update_date - 更新时间
      */
-    public Date getUpdataDate() {
-        return updataDate;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
     /**
      * 设置更新时间
      *
-     * @param updataDate 更新时间
+     * @param updateDate 更新时间
      */
-    public void setUpdataDate(Date updataDate) {
-        this.updataDate = updataDate;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

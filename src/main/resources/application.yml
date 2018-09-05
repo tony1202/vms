@@ -11,8 +11,8 @@ server:
 spring:
   freemarker:
     enabled: true
-    suffix: .jsp
-    prefix:
+    suffix: .html
+    prefix: templates/
   mvc:
     date-format: "yyyy-MM-dd HH:mm:ss"
   jackson:
@@ -32,7 +32,7 @@ spring:
 
 mybatis:
   type-aliases-package: com.gfx.vms.common.entity
-  mapper-locations: classpath*:mapper/*Mapper.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
   configuration:
     #开启驼峰转换
     map-underscore-to-camel-case: true

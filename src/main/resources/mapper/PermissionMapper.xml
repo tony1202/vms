@@ -10,6 +10,6 @@
     <result column="permission_desc" jdbcType="VARCHAR" property="permissionDesc" />
     <result column="p_id" jdbcType="VARCHAR" property="pId" />
     <result column="create_date" jdbcType="DATE" property="createDate" />
-    <result column="updata_date" jdbcType="DATE" property="updataDate" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
   </resultMap>
 </mapper>
