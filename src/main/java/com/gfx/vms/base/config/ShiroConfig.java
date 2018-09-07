@@ -12,6 +12,8 @@ import org.apache.shiro.session.mgt.ValidatingSessionManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
@@ -36,11 +38,6 @@ import java.util.List;
  */
 @Configuration
 public class ShiroConfig {
-    @Autowired
-    private UserAuthorizingRealm userAuthorizingRealm;
-    @Autowired
-    private com.gfx.vms.base.security.listener.SessionListener sessionListener;
-
     /**
      * shiro 核心配置 securityManager
      * @return
@@ -51,7 +48,7 @@ public class ShiroConfig {
         //开启shiro的ehcache缓存管理
         securityManager.setCacheManager(cacheManager());
         //配置realm
-        securityManager.setRealm(userAuthorizingRealm);
+        securityManager.setRealm(new UserAuthorizingRealm());
         //配置sessionManager
         securityManager.setSessionManager(sessionManager());
         return securityManager;
@@ -96,6 +93,15 @@ public class ShiroConfig {
     }
 
     /**
+     * Shiro生命周期处理器
+     * @return
+     */
+    @Bean(name = "lifecycleBeanPostProcessor")
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
+        return new LifecycleBeanPostProcessor();
+    }
+
+    /**
      *shiro与spring的整合
      * @return
      */
@@ -107,13 +113,20 @@ public class ShiroConfig {
         return advisorAutoProxyCreator;
     }
 
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(){
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
+        return authorizationAttributeSourceAdvisor;
+    }
+
     /**
      * shiro 缓存管理
      * @return
      */
     private EhCacheManager cacheManager(){
         EhCacheManager cacheManager = new EhCacheManager();
-        cacheManager.setCacheManagerConfigFile("classpath:/config/ehcache.xml");
+        cacheManager.setCacheManagerConfigFile("classpath:config/ehcache.xml");
         return cacheManager;
     }
 
@@ -146,7 +159,7 @@ public class ShiroConfig {
 
         //配置session监听器
         List<SessionListener> sessionListeners = new ArrayList<>();
-        sessionListeners.add(sessionListener);
+        sessionListeners.add(new com.gfx.vms.base.security.listener.SessionListener());
         sessionManager.setSessionListeners(sessionListeners);
 
         //配置session缓存管理
