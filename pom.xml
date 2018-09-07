@@ -32,6 +32,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -127,9 +131,19 @@
             <artifactId>java-uuid-generator</artifactId>
             <version>3.1.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.27-incubating</version>
+        </dependency>
 
-
-
+        <!--配置shiro - freemarker 标签 start-->
+        <dependency>
+            <groupId>net.mingsoft</groupId>
+            <artifactId>shiro-freemarker-tags</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <!--配置shiro - freemarker 标签 end-->
 
     </dependencies>
 

@@ -12,7 +12,7 @@ spring:
   freemarker:
     enabled: true
     suffix: .html
-    prefix: templates/
+    prefix: templates/page/
   mvc:
     date-format: "yyyy-MM-dd HH:mm:ss"
   jackson:

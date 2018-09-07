@@ -11,4 +11,7 @@
     <result column="create_date" jdbcType="DATE" property="createDate" />
     <result column="update_date" jdbcType="DATE" property="updateDate" />
   </resultMap>
+    <select id="getRolesByUserId" resultType="java.lang.String">
+      SELECT role_id from role r LEFT JOIN user_role ur on r.role_id = ur.r_id WHERE ur.u_id = ${userId}
+    </select>
 </mapper>

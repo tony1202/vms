@@ -2,16 +2,17 @@ package com.gfx.vms.base.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author tony
  * @date 2018/9/5
- * @Description:
+ * @Description: session中存储用户的信息
  */
 @Data
-public class UserInfoDto {
+public class UserInfoDto implements Serializable{
     /**用户id*/
     private String userId;
     /**用户名*/

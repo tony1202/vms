@@ -43,3 +43,21 @@ CREATE TABLE user_role(
     CONSTRAINT fk_rp_r_id FOREIGN KEY (r_id) REFERENCES role(role_id)
     )CHARSET=utf8 COMMENT='角色权限表';
 
+ -- 用户登录登出表
+ CREATE TABLE access_record(
+    id INT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
+    user_id VARCHAR(50) NOT NULL COMMENT '登录用户id',
+    access_type VARCHAR(20) NOT NULL COMMENT '登录类型:登入或登出',
+    access_ip VARCHAR(50) COMMENT '用户访问ip',
+    access_date DATE COMMENT '访问时间'
+    )CHARSET=utf8 COMMENT='用户登录登出记录表';
+
+ --用户操作记录表
+CREATE TABLE operation_record(
+id INT PRIMARY KEY AUTO_INCREMENT COMMENT '记录id',
+user_id VARCHAR(50) NOT NULL COMMENT '用户id',
+operation_name VARCHAR(50) NOT NULL COMMENT '操作的名称',
+operation_reslut VARCHAR(50) NOT NULL COMMENT '操作结果',
+operation_date DATE COMMENT '操作时间'
+)CHARSET=utf8 COMMENT '用户操作记录表';
+
