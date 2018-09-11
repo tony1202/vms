@@ -29,6 +29,7 @@ public class FilterChainDefinitionMapBuilder {
             put("/js/**", "anon");//不需要权限
             put("/fonts/**", "anon");//不需要权限
             put("/media/**", "anon");//不需要权限
+            put("/page/**", "anon");//不需要权限
             put("/errorPage/**", "anon");//不需要权限
             put("/login","anon,kickOut");
             put("/account/**","anon");

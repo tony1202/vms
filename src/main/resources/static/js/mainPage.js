@@ -9,13 +9,13 @@ $(function() {
 
 // 加载欢迎界面
 function welcomePageInit(){
-	$('#panel').load('pagecomponent/welcomePage.jsp');
+	$('#panel').load('page/welcomePage.html');
 }
 
 // 跳回首页
 function homePage(){
 	$('.home').click(function(){
-		$('#panel').load('pagecomponent/welcomePage.jsp');
+		$('#panel').load('page/welcomePage.html');
 	})
 }
 
