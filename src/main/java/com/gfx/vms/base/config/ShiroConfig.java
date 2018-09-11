@@ -3,7 +3,9 @@ package com.gfx.vms.base.config;
 import com.gfx.vms.base.security.filter.ExtendFormAuthenticationFilter;
 import com.gfx.vms.base.security.filter.KickOutSessionControlFilter;
 import com.gfx.vms.base.security.realms.UserAuthorizingRealm;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -43,12 +45,12 @@ public class ShiroConfig {
      * @return
      */
     @Bean(name = "securityManager")
-    public DefaultWebSecurityManager securityManager(){
+    public DefaultWebSecurityManager securityManager(UserAuthorizingRealm realm){
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //开启shiro的ehcache缓存管理
         securityManager.setCacheManager(cacheManager());
         //配置realm
-        securityManager.setRealm(new UserAuthorizingRealm());
+        securityManager.setRealm(realm);
         //配置sessionManager
         securityManager.setSessionManager(sessionManager());
         return securityManager;
@@ -59,10 +61,10 @@ public class ShiroConfig {
      * @return
      */
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         //配置安全管理器
-        shiroFilter.setSecurityManager(securityManager());
+        shiroFilter.setSecurityManager(securityManager);
 
         /******************添加自定义的过滤器******************/
         //配置并发登录人数控制
@@ -114,9 +116,9 @@ public class ShiroConfig {
     }
 
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(){
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
     }
 
@@ -124,7 +126,8 @@ public class ShiroConfig {
      * shiro 缓存管理
      * @return
      */
-    private EhCacheManager cacheManager(){
+    @Bean(name = "cacheManager")
+    public EhCacheManager cacheManager(){
         EhCacheManager cacheManager = new EhCacheManager();
         cacheManager.setCacheManagerConfigFile("classpath:config/ehcache.xml");
         return cacheManager;
@@ -134,7 +137,8 @@ public class ShiroConfig {
      * session manager
      * @return DefaultWebSessionManager
      */
-    private DefaultWebSessionManager sessionManager(){
+    @Bean(name = "sessionManager")
+    public DefaultWebSessionManager sessionManager(){
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         //配置session持久化
         sessionManager.setSessionDAO(sessionDAO());
@@ -190,7 +194,7 @@ public class ShiroConfig {
         ExecutorServiceSessionValidationScheduler sessionValidationScheduler = new ExecutorServiceSessionValidationScheduler();
         // 配置定时时间
         sessionValidationScheduler.setInterval(9000);
-        sessionValidationScheduler.setSessionManager(sessionManager());
+        //sessionValidationScheduler.setSessionManager(sessionManager());
         return sessionValidationScheduler;
     }
 }

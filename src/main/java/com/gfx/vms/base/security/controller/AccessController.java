@@ -1,7 +1,6 @@
 package com.gfx.vms.base.security.controller;
 
 import com.gfx.vms.base.constant.VMSConstant;
-import com.gfx.vms.base.controller.BaseController;
 import com.gfx.vms.base.dto.UserInfoDto;
 import com.gfx.vms.base.dto.VMSResponse;
 import com.gfx.vms.base.dto.VMSResponseFactory;
@@ -15,6 +14,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +32,10 @@ import java.util.Map;
  * @date 2018/9/5
  * @Description:
  */
-@RestController("/account")
-public class AccessController extends BaseController {
+@RestController
+@RequestMapping("/account")
+public class AccessController {
+    private static final Logger log = LoggerFactory.getLogger(AccessController.class);
 
     @Autowired
     private SystemLogService systemLogService;
@@ -102,9 +105,9 @@ public class AccessController extends BaseController {
     /**
      * 获取图形码
      *
-     * @param response
+     * @param response 响应
      */
-    @RequestMapping("/checkCode/{time}")
+    @GetMapping("/checkCode/{time}")
     public void createCheckImage(@PathVariable String time, HttpServletResponse response, HttpServletRequest request) {
 
         BufferedImage checkCodeImage = null;
@@ -129,8 +132,6 @@ public class AccessController extends BaseController {
                 response.setDateHeader("Expires", 0);
                 //设置图片格式
                 response.setContentType("image/png");
-
-
                 ImageIO.write(checkCodeImage, "png", response.getOutputStream());
             } catch (IOException e) {
                 log.info("fail in checkCodeImage outputStream ->{}",e.getMessage());

@@ -12,7 +12,8 @@ spring:
   freemarker:
     enabled: true
     suffix: .html
-    prefix: templates/page/
+    charset: utf-8
+    request-context-attribute: request
   mvc:
     date-format: "yyyy-MM-dd HH:mm:ss"
   jackson:
@@ -29,6 +30,8 @@ spring:
       max-active: 20
       min-idle: 1
       initial-size: 1
+
+
 
 mybatis:
   type-aliases-package: com.gfx.vms.common.entity
@@ -50,11 +53,3 @@ pagehelper:
   support-methods-arguments: true
   page-size-zero: true
   params: count=countSql;pageNum=page;pageSize=pageSize
-
-
-
-
-
-
-
-

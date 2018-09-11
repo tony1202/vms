@@ -4,17 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>仓库管理系统</title>
     <link rel="stylesheet" type="text/css"
-          href="/static/css/bootstrap.min.css">
+          href="${request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css"
-          href="/static/css/bootstrap-table.css">
+          href="${request.contextPath}/css/bootstrap-table.css">
     <link rel="stylesheet" type="text/css"
-          href="/static/css/bootstrap-datetimepicker.min.css">
+          href="${request.contextPath}/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css"
-          href="/static/css/jquery-ui.css">
+          href="${request.contextPath}/css/jquery-ui.css">
     <link rel="stylesheet" type="text/css"
-          href="/static/css/jquery.mloading.css">
+          href="${request.contextPath}/css/jquery.mloading.css">
     <link rel="stylesheet" type="text/css"
-          href="/static/css/mainPage.css">
+          href="${request.contextPath}/css/mainPage.css">
 </head>
 <body>
 
@@ -35,15 +35,16 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle"
                            data-toggle="dropdown"> <span class="glyphicon glyphicon-user"></span>
-                            <span>欢迎&nbsp;</span> <span id="nav_userName">用户名:${sessionScope.userInfo.userName}</span>
+                            <span>欢迎&nbsp;</span> <span id="nav_userName">用户名:<#if Session["userInfo"]??>${Session["userInfo"].userName}</#if></span>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <shiro:hasRole name="commonsAdmin">
+
+                            <@shiro.hasRole name="commonsAdmin">
                                 <li>
                                     <a href="#" id="editInfo"> <span
                                             class="glyphicon glyphicon-pencil"></span> &nbsp;&nbsp;修改个人信息</a></li>
-                            </shiro:hasRole>
+                            </@shiro.hasRole>
                             <li>
                                 <a href="javascript:void(0)" id="signOut"> <span
                                         class="glyphicon glyphicon-off"></span> &nbsp;&nbsp;注销登录
@@ -77,23 +78,23 @@
                     <div id="collapse1" class="panel-collapse collapse collapseBody">
                         <div class="panel-body">
                             <ul class="list-group">
-                                <shiro:hasRole name="commonsAdmin">
+                                <@shiro.hasRole name="commonsAdmin">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/storageManagementCommon.jsp">库存查询</a>
+                                           name="page/storageManagementCommon.html">库存查询</a>
                                     </li>
-                                </shiro:hasRole>
-                                <shiro:hasRole name="systemAdmin">
+                                </@shiro.hasRole>
+                                <@shiro.hasRole name="systemAdmin">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/storageManagement.jsp">库存查询</a>
+                                           name="page/storageManagement.html">库存查询</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"
                                            class="menu_item"
-                                           name="pagecomponent/stockRecordManagement.jsp">出入库记录</a>
+                                           name="page/stockRecordManagement.html">出入库记录</a>
                                     </li>
-                                </shiro:hasRole>
+                                </@shiro.hasRole>
                             </ul>
                         </div>
                     </div>
@@ -110,34 +111,34 @@
                     </div>
                     <div id="collapse2" class="panel-collapse collapse collapseBody in">
                         <div class="panel-body">
-                            <shiro:hasRole name="systemAdmin">
+                            <@shiro.hasRole name="systemAdmin">
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/stock-inManagement.jsp">货物入库</a>
+                                           name="page/stock-inManagement.html">货物入库</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/stock-outManagement.jsp">货物出库</a>
+                                           name="page/stock-outManagement.html">货物出库</a>
                                     </li>
                                 </ul>
-                            </shiro:hasRole>
-                            <shiro:hasRole name="commonsAdmin">
+                            </@shiro.hasRole>
+                            <@shiro.hasRole name="commonsAdmin">
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/stock-inManagementCommon.jsp">货物入库</a>
+                                           name="page/stock-inManagementCommon.html">货物入库</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/stock-outManagementCommon.jsp">货物出库</a>
+                                           name="page/stock-outManagementCommon.html">货物出库</a>
                                     </li>
                                 </ul>
-                            </shiro:hasRole>
+                            </@shiro.hasRole>
                         </div>
                     </div>
                 </div>
-                <shiro:hasRole name="systemAdmin">
+                <@shiro.hasRole name="systemAdmin">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -153,14 +154,14 @@
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/repositoryAdminManagement.jsp">仓库管理员管理</a>
+                                           name="page/repositoryAdminManagement.html">仓库管理员管理</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                </shiro:hasRole>
-                <shiro:hasRole name="systemAdmin">
+                </@shiro.hasRole>
+                <@shiro.hasRole name="systemAdmin">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -176,25 +177,25 @@
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/supplierManagement.jsp">供应商信息管理</a>
+                                           name="page/supplierManagement.html">供应商信息管理</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/customerManagement.jsp">客户信息管理</a>
+                                           name="page/customerManagement.html">客户信息管理</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/goodsManagement.jsp">货物信息管理</a>
+                                           name="page/goodsManagement.html">货物信息管理</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"  class="menu_item"
-                                           name="pagecomponent/repositoryManagement.jsp">仓库信息管理</a>
+                                           name="page/repositoryManagement.html">仓库信息管理</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                </shiro:hasRole>
+                </@shiro.hasRole>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -208,18 +209,18 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <a href="javascript:void(0)"  class="menu_item"
-                                       name="pagecomponent/passwordModification.jsp">更改密码</a>
+                                       name="page/passwordModification.html">更改密码</a>
                                 </li>
-                                <shiro:hasRole name="systemAdmin">
+                                <@shiro.hasRole name="systemAdmin">
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"
-                                           class="menu_item" name="pagecomponent/userOperationRecorderManagement.jsp">系统日志</a>
+                                           class="menu_item" name="page/userOperationRecorderManagement.html">系统日志</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="javascript:void(0)"
-                                           class="menu_item" name="pagecomponent/accessRecordManagement.jsp">登陆日志</a>
+                                           class="menu_item" name="page/accessRecordManagement.html">登陆日志</a>
                                     </li>
-                                </shiro:hasRole>
+                                </@shiro.hasRole>
                             </ul>
                         </div>
                     </div>
@@ -244,7 +245,7 @@
                         <div class="col-md-10" style="text-align: center">
                             <div class="col-md-4 col-sm-4">
                                 <a href="javascript:void(0)" class="thumbnail shortcut"> <img
-                                        src="/static/media/icons/stock_search-512.png" alt="库存查询"
+                                        src="${request.contextPath}/media/icons/stock_search-512.png" alt="库存查询"
                                         class="img-rounded link" style="width: 150px; height: 150px;">
                                     <div class="caption">
                                         <h3 class="title">库存查询</h3>
@@ -253,7 +254,7 @@
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <a href="javascript:void(0)" class="thumbnail shortcut"> <img
-                                        src="/static/media/icons/stock_in-512.png" alt="货物入库"
+                                        src="${request.contextPath}/media/icons/stock_in-512.png" alt="货物入库"
                                         class="img-rounded link" style="width: 150px; height: 150px;">
                                     <div class="caption">
                                         <h3 class="title">货物入库</h3>
@@ -262,7 +263,7 @@
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <a href="javascript:void(0)" class="thumbnail shortcut"> <img
-                                        src="/static/media/icons/stock_out-512.png" alt="货物出库"
+                                        src="${request.contextPath}/media/icons/stock_out-512.png" alt="货物出库"
                                         class="img-rounded link" style="width: 150px; height: 150px;">
                                     <div class="caption">
                                         <h3 class="title">货物出库</h3>
@@ -296,12 +297,12 @@
                     <div class="col-md-4 col-sm-4"></div>
                     <div class="col-md-4 col-sm-4">
                         <div id="info_success" class=" hide" style="text-align: center;">
-                            <img src="/static/media/icons/success-icon.png" alt=""
-                                style="width: 100px; height: 100px;">
+                            <img src="${request.contextPath}/media/icons/success-icon.png" alt=""
+                                 style="width: 100px; height: 100px;">
                         </div>
                         <div id="info_error" style="text-align: center;">
-                            <img src="/static/media/icons/error-icon.png" alt=""
-                                style="width: 100px; height: 100px;">
+                            <img src="${request.contextPath}/media/icons/error-icon.png" alt=""
+                                 style="width: 100px; height: 100px;">
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4"></div>
@@ -348,9 +349,9 @@
                             <div class="form-group">
                                 <label for="" class="control-label col-md-4 col-sm-4"> 用户ID: </label>
                                 <div class="col-md-6 col-sm-6">
-                                    <span class="hidden" id="userID">${sessionScope.userInfo.userID }</span>
-                                    <span class="hidden" id="isFirstLogin">${sessionScope.userInfo.firstLogin}</span>
-                                    <p class="form-control-static">${sessionScope.userInfo.userID }</p>
+                                    <span class="hidden" id="userID"><#if Session["userInfo"]??>${Session["userInfo"].ip}</#if></span>
+                                    <span class="hidden" id="isFirstLogin"></span>
+                                    <p class="form-control-static"><#if Session["userInfo"]??>${Session["userInfo"].ip}</#if></p>
                                 </div>
                             </div>
 
@@ -407,28 +408,28 @@
 
 
 <script type="text/javascript"
-        src="/static/js/jquery-2.2.3.min.js"></script>
+        src="${request.contextPath}/js/jquery-2.2.3.min.js"></script>
 <script type="text/javascript"
-        src="/static/js/bootstrap.min.js"></script>
+        src="${request.contextPath}/js/bootstrap.min.js"></script>
 <script type="text/javascript"
-        src="/static/js/jquery-ui.min.js"></script>
+        src="${request.contextPath}/js/jquery-ui.min.js"></script>
 <script type="text/javascript"
-        src="/static/js/bootstrapValidator.min.js"></script>
+        src="${request.contextPath}/js/bootstrapValidator.min.js"></script>
 <script type="text/javascript"
-        src="/static/js/bootstrap-table.min.js"></script>
+        src="${request.contextPath}/js/bootstrap-table.min.js"></script>
 <script type="text/javascript"
-        src="/static/js/bootstrap-table-zh-CN.min.js"></script>
+        src="${request.contextPath}/js/bootstrap-table-zh-CN.min.js"></script>
 <script type="text/javascript"
-        src="/static/js/jquery.md5.js"></script>
+        src="${request.contextPath}/js/jquery.md5.js"></script>
 <script type="text/javascript"
-        src="/static/js/jquery.mloading.js"></script>
+        src="${request.contextPath}/js/jquery.mloading.js"></script>
 <script type="text/javascript"
-        src="/static/js/mainPage.js"></script>
+        src="${request.contextPath}/js/mainPage.js"></script>
 <script type="text/javascript"
-        src="/static/js/ajaxfileupload.js"></script>
+        src="${request.contextPath}/js/ajaxfileupload.js"></script>
 <script type="text/javascript"
-        src="/static/js/bootstrap-datetimepicker.min.js"></script>
+        src="${request.contextPath}/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript"
-        src="/static/js/bootstrap-datetimepicker.zh-CN.js"></script>
+        src="${request.contextPath}/js/bootstrap-datetimepicker.zh-CN.js"></script>
 </body>
 </html>

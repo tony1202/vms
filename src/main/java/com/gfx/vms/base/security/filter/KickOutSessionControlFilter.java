@@ -69,9 +69,9 @@ public class KickOutSessionControlFilter extends AccessControlFilter {
     /**
      * 是否允许访问
      *
-     * @param request
-     * @param response
-     * @param mappedValue
+     * @param request 请求
+     * @param response 响应
+     * @param mappedValue 映射值
      * @return
      * @throws Exception
      */

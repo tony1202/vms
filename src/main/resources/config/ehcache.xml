@@ -87,12 +87,12 @@
         timeToIdleSeconds="0"
         timeToLiveSeconds="0"
         overflowToDisk="false"
-        /> -->
+        />
 
     <!-- Place configuration for your caches following -->
 
     <!-- session dao cache 配置 -->
-    <cache name="sessionCache"
+    <cache name="shiroSessionCache"
            maxElementsInMemory="10000"
            overflowToDisk="true"
            timeToIdleSeconds="0"

@@ -23,7 +23,7 @@ public class FreemarkerConfig {
     @Bean
     public FreeMarkerConfigurer freeMarkerConfigurer() throws IOException, TemplateException {
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
-        freeMarkerConfigurer.setTemplateLoaderPath("classpath:/templates/page/");
+        freeMarkerConfigurer.setTemplateLoaderPath("classpath:/templates/");
         freemarker.template.Configuration configuration = freeMarkerConfigurer.createConfiguration();
         configuration.setDefaultEncoding("UTF-8");
         //添加shiro标签 在页面中使用<@shiro.xxx>

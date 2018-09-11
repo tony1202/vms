@@ -22,7 +22,7 @@ public abstract class VMSConstant {
      */
     public interface ShiroConstant{
         /**shiro cache 缓存*/
-        String SESSION_CACHE = "sessionCache";
+        String SESSION_CACHE = "shiroSessionCache";
         /**用户被踢出的标记*/
         String KICK_OUT = "kickOut";
     }

@@ -25,13 +25,17 @@ public class FilterChainDefinitionMapBuilder {
     public static LinkedHashMap<String, String> builderFilterChainDinitionMap() {
         LinkedHashMap<String, String> permissionMap = new LinkedHashMap<String, String>() {{
             //配置固定权限
-            put("/static/**/**", "anon");//不需要权限
+            put("/css/**", "anon");//不需要权限
+            put("/js/**", "anon");//不需要权限
+            put("/fonts/**", "anon");//不需要权限
+            put("/media/**", "anon");//不需要权限
+            put("/errorPage/**", "anon");//不需要权限
             put("/login","anon,kickOut");
-            put("/account/login","anon");
-            put("account/checkCode","anon");
+            put("/account/**","anon");
+            //put("/account/checkCode/**","anon");
         }};
         //其他可变权限
-        permissionMap.put("/","authc");
+        permissionMap.put("/**","authc");
 
         return permissionMap;
     }

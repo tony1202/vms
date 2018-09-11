@@ -4,9 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登陆</title>
 <link rel="stylesheet" type="text/css"
-	href="/static/css/bootstrap.min.css">
+	href="${request.contextPath}/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
-	href="/static/css/model/login/login.css">
+	href="${request.contextPath}/css/model/login/login.css">
 </head>
 <body>
 	<!-- 定义容器 -->
@@ -57,7 +57,7 @@
 								</div>
 								<div>
 									<img id="checkCodeImg" alt="checkCodeImg"
-										src="/account/checkCode/1">
+										src="${request.contextPath}/account/checkCode/1">
 								</div>
 							</div>
 
@@ -79,16 +79,17 @@
 	</div>
 
 	<script type="text/javascript"
-		src="/static/js/jquery-2.2.3.min.js"></script>
+		src="${request.contextPath}/js/jquery-2.2.3.min.js"></script>
 	<script type="text/javascript"
-		src="/static/js/bootstrap.min.js"></script>
+		src="${request.contextPath}/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
-		src="/static/js/bootstrapValidator.min.js"></script>
+		src="${request.contextPath}/js/bootstrapValidator.min.js"></script>
 	<script type="text/javascript"
-		src="/static/js/jquery.md5.js"></script>
+		src="${request.contextPath}/js/jquery.md5.js"></script>
 
 	<script>
 		$(function() {
+		    console.log("******contextPath****"+"${request.contextPath}");
 			validatorInit();
 			refreshCheckCode();
 		});
@@ -97,15 +98,16 @@
 		function refreshCheckCode() {
 			$('#checkCodeImg').click(function() {
 				var timestamp = new Date().getTime();
-				$(this).attr("src", "/account/checkCode/" + timestamp)
+				$(this).attr("src", "${request.contextPath}/account/checkCode/" + timestamp)
 			})
 		}
 
 		// 登陆信息加密模块
 		function infoEncrypt(userId, password, checkCode) {
-			var str1 = $.md5(password);
-			var str2 = $.md5(str1 + userId);
-			var str3 = $.md5(str2 + checkCode.toUpperCase());
+			//var str1 = $.md5(password);
+			//var str2 = $.md5(str1 + userId);
+			//var str3 = $.md5(str2 + checkCode.toUpperCase());
+			var str3 = $.md5(password + checkCode.toUpperCase());
 			return str3;
 		}
 
@@ -123,8 +125,8 @@
 							notEmpty : {
 								message : '用户名不能为空'
 							},regexp: {
-		                        regexp: '[0-9]+',
-		                        message: '只允许输入数字'
+		                        regexp: '^[A-Za-z0-9]{8,16}$',
+		                        message: '由字符或数字组成,长度为8-16'
 		                    },
 							callback : {}
 						}
@@ -170,7 +172,7 @@
 				};
 				$.ajax({
 					type:"POST",
-					url:"account/login",
+					url:"${request.contextPath}/account/login",
 					dataType:"json",
 					contentType:"application/json",
 					data:JSON.stringify(data),
@@ -200,11 +202,11 @@
 							bv.updateStatus(field,'INVALID','callback');
 							bv.updateStatus("checkCode",'INVALID','callback');
 							
-							$('#checkCodeImg').attr("src","/account/checkCode/" + new Date().getTime());
+							$('#checkCodeImg').attr("src","${request.contextPath}/account/checkCode/" + new Date().getTime());
 							$('#checkCode').val("");
 						}else{
 							// 页面跳转
-							window.location.href = "/WMS";
+							window.location.href = "${request.contextPath}/vms";
 						}
 					},
 					error:function(data){

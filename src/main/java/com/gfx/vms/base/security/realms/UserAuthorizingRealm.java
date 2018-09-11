@@ -82,7 +82,7 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
                     String passWord = userInfo.getPassWord();
                     if (StringUtils.isNoneBlank(checkCode, passWord)) {
                         checkCode = checkCode.toUpperCase();
-                        credentials = MD5Util.MD5(checkCode + passWord);
+                        credentials = MD5Util.MD5(passWord+checkCode);
                     }
 
                     //清楚useInfo中密码
