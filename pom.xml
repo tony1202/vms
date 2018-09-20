@@ -8,7 +8,7 @@
 	<version>1.0.0-RELEASE</version>
     <modules>
         <module>generalmapper</module>
-    </modules>
+	</modules>
     <packaging>pom</packaging>
 
 	<name>vms</name>
@@ -35,6 +35,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
         </dependency>
 
 		<dependency>
@@ -146,7 +151,15 @@
         </dependency>
         <!--配置shiro - freemarker 标签 end-->
 
-    </dependencies>
+        <!--配置ehcahe缓存-->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.10.5</version>
+		</dependency>
+
+
+	</dependencies>
 
 	<build>
 		<plugins>

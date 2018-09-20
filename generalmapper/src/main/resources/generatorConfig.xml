@@ -41,8 +41,8 @@
         </javaClientGenerator>
 
         <!--指定对应表-->
-        <table schema="" tableName="access_record"/>
-        <table schema="" tableName="operation_record"/>
+        <table schema="" tableName="goods"/>
+        <table schema="" tableName="dir"/>
         <!--<table schema="" tableName="user"/>-->
         <!--<table schema="" tableName="user"/>-->
 

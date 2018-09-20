@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gfx.vms.common.dao.mapper.DirMapper">
+  <resultMap id="BaseResultMap" type="com.gfx.vms.common.entity.Dir">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+  </resultMap>
+    <select id="getListDirByType" resultType="com.gfx.vms.common.entity.Dir">
+      SELECT id,type,name FROM dir where type = #{type}
+    </select>
+</mapper>

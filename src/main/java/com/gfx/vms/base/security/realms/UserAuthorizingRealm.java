@@ -15,6 +15,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -30,6 +31,11 @@ public class UserAuthorizingRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+
+    @Override
+    public void setAuthorizationCacheName(String authorizationCacheName) {
+        super.setAuthorizationCacheName(authorizationCacheName);
+    }
 
     /**
      * 用户授权

@@ -150,8 +150,8 @@ public class KickOutSessionControlFilter extends AccessControlFilter {
                     //普通请求 -- 重定向
                     WebUtils.issueRedirect(request,response,kickOutUrl);
                 }else {
-                    //ajax请求 -- 设置状态码
-                    httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                    //ajax请求 -- 设置状态码(430:已经在其他地方有登录)
+                    httpServletResponse.setStatus(430);
                 }
             } catch (IOException e) {
                 log.warn("kick out user error -->{}",e.getMessage());

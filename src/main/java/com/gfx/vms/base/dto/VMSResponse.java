@@ -70,6 +70,7 @@ public class VMSResponse implements Serializable{
         this.responseContent.put(key,value);
     }
 
+
     /**
      * 生成 response
      * @return 代表 response 的一个 Map 对象

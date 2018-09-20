@@ -30,6 +30,12 @@ spring:
       max-active: 20
       min-idle: 1
       initial-size: 1
+  cache:
+    ehcache:
+      config: classpath:config/ehcache.xml
+    cache-names: shiroSessionCache
+
+
 
 
 
@@ -53,3 +59,4 @@ pagehelper:
   support-methods-arguments: true
   page-size-zero: true
   params: count=countSql;pageNum=page;pageSize=pageSize
+

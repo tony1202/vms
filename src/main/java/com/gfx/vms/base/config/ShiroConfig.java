@@ -3,14 +3,9 @@ package com.gfx.vms.base.config;
 import com.gfx.vms.base.security.filter.ExtendFormAuthenticationFilter;
 import com.gfx.vms.base.security.filter.KickOutSessionControlFilter;
 import com.gfx.vms.base.security.realms.UserAuthorizingRealm;
-import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
-import org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler;
-import org.apache.shiro.session.mgt.SessionManager;
-import org.apache.shiro.session.mgt.SessionValidationScheduler;
-import org.apache.shiro.session.mgt.ValidatingSessionManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -21,12 +16,11 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.ClassPathResource;
 
 import javax.servlet.Filter;
 import java.util.ArrayList;
@@ -128,8 +122,13 @@ public class ShiroConfig {
      */
     @Bean(name = "cacheManager")
     public EhCacheManager cacheManager(){
+        EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+        ehCacheManagerFactoryBean.setCacheManagerName("ShiroSessionCache");
+        ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("classpath:config/ehcache.xml"));
+        net.sf.ehcache.CacheManager object = ehCacheManagerFactoryBean.getObject();
         EhCacheManager cacheManager = new EhCacheManager();
-        cacheManager.setCacheManagerConfigFile("classpath:config/ehcache.xml");
+        cacheManager.setCacheManager(object);
+        //cacheManager.setCacheManagerConfigFile("classpath:config/ehcache.xml");
         return cacheManager;
     }
 
@@ -152,14 +151,16 @@ public class ShiroConfig {
 
         //关闭 URL 的 JSESSIONID 重写
         sessionManager.setSessionIdUrlRewritingEnabled(false);
+        sessionManager.setGlobalSessionTimeout(1800000);
+        sessionManager.setSessionValidationInterval(900000);
 
         //session 超时配置
         //开启session 验证定时器
-        sessionManager.setSessionValidationSchedulerEnabled(true);
-        //开启删除过期session
-        sessionManager.setDeleteInvalidSessions(true);
-        //配置验证定时间
-        sessionManager.setSessionValidationScheduler(sessionValidationScheduler());
+         sessionManager.setSessionValidationSchedulerEnabled(true);
+        // //开启删除过期session
+         sessionManager.setDeleteInvalidSessions(true);
+        // //配置验证定时间
+        // sessionManager.setSessionValidationScheduler(sessionValidationScheduler);
 
         //配置session监听器
         List<SessionListener> sessionListeners = new ArrayList<>();
@@ -190,11 +191,12 @@ public class ShiroConfig {
      * 会话验证定时器
      * @return
      */
-    private SessionValidationScheduler sessionValidationScheduler(){
-        ExecutorServiceSessionValidationScheduler sessionValidationScheduler = new ExecutorServiceSessionValidationScheduler();
-        // 配置定时时间
-        sessionValidationScheduler.setInterval(9000);
-        //sessionValidationScheduler.setSessionManager(sessionManager());
-        return sessionValidationScheduler;
-    }
+    // @Bean("sessionValidationScheduler")
+    // public SessionValidationScheduler sessionValidationScheduler(DefaultWebSessionManager sessionManager){
+    //     ExecutorServiceSessionValidationScheduler sessionValidationScheduler = new ExecutorServiceSessionValidationScheduler();
+    //     // 配置定时时间
+    //     sessionValidationScheduler.setInterval(9000);
+    //     sessionValidationScheduler.setSessionManager(sessionManager);
+    //     return sessionValidationScheduler;
+    // }
 }
