@@ -76,11 +76,11 @@
 										title : '客户名称'
 									},
 									{
-										field : 'personInCharge',
+										field : 'linkMan',
 										title : '负责人'
 									},
 									{
-										field : 'tel',
+										field : 'phone',
 										title : '联系电话'
 									},
 									{
@@ -117,7 +117,7 @@
 											}
 										}
 									} ],
-							url : 'customerManage/getCustomerList',
+							url : 'customer/getCustomerList',
 							onLoadError:function(status){
 								handleAjaxError(status);
 							},
@@ -230,7 +230,7 @@
 					// ajax
 					$.ajax({
 						type : "POST",
-						url : 'customerManage/updateCustomer',
+						url : 'customer/updateCustomer',
 						dataType : "json",
 						contentType : "application/json",
 						data : JSON.stringify(data),
@@ -268,7 +268,7 @@
 			// ajax
 			$.ajax({
 				type : "GET",
-				url : "customerManage/deleteCustomer",
+				url : "customer/deleteCustomer",
 				dataType : "json",
 				contentType : "application/json",
 				data : data,
@@ -314,7 +314,7 @@
 			// ajax
 			$.ajax({
 				type : "POST",
-				url : "customerManage/addCustomer",
+				url : "customer/addCustomer",
 				dataType : "json",
 				contentType : "application/json",
 				data : JSON.stringify(data),
@@ -398,7 +398,7 @@
 
 			// ajax
 			$.ajaxFileUpload({
-				url : "customerManage/importCustomer",
+				url : "customer/importCustomer",
 				secureuri: false,
 				dataType: 'json',
 				fileElementId:"file",
@@ -447,7 +447,7 @@
 				searchType : search_type_customer,
 				keyWord : search_keyWord
 			}
-			var url = "customerManage/exportCustomer?" + $.param(data)
+			var url = "customer/exportCustomer?" + $.param(data)
 			window.open(url, '_blank');
 			$('#export_modal').modal("hide");
 		})

@@ -41,8 +41,7 @@
         </javaClientGenerator>
 
         <!--指定对应表-->
-        <table schema="" tableName="goods"/>
-        <table schema="" tableName="dir"/>
+        <table schema="" tableName="customer"/>
         <!--<table schema="" tableName="user"/>-->
         <!--<table schema="" tableName="user"/>-->
 
